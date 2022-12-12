@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="profile-card__stats__actions">
-                        <button class="button profile-card__edit-button">Edit profile</button>
+                        <a href="index.php?s=edit-profile" class="button profile-card__edit-button">Edit profile</a>
                     </div>
                 </div>
 
