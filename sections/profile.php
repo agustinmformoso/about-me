@@ -71,6 +71,7 @@
             </div>
 
             <input class="new-post__title" type="text" placeholder="title" />
+
             <textarea class="new-post__post-box" rows="4" placeholder="Post something..."></textarea>
 
             <div class="new-post__actions">
