@@ -1,17 +1,22 @@
+<?php
+$birthdate = new DateTime(authGetUser()['birthdate']);
+$creation_date = new DateTime(authGetUser()['creation_date']);
+?>
+
 <section class="profile">
     <div class="profile-card">
         <div class="profile-card__header">
-            <img src="http://localhost/www/aboutdotme/img/banner.jpeg" alt="profile_banner">
+            <img src="img/<?= authGetUser()['banner_picture']; ?>" alt="<?= authGetUser()['banner_picture_alt']; ?>">
         </div>
         <div class="profile-card__body">
             <div class="profile-card__stats">
                 <div class="profile-card__profile-picture">
-                    <img src="http://localhost/www/aboutdotme/img/profile.jpg" alt="profile_picture">
+                    <img src="img/<?= authGetUser()['profile_picture']; ?>" alt="<?= authGetUser()['profile_picture_alt']; ?>">
                 </div>
 
                 <div class="profile-card__account">
-                    <p>user_name</p>
-                    <span>user_id</span>
+                    <p><?= authGetUser()['name']; ?></p>
+                    <span>@<?= authGetUser()['username']; ?></span>
                 </div>
 
                 <div class="profile-card__stats__container">
@@ -32,18 +37,17 @@
             </div>
 
             <div class="profile-card__biography-content">
-                <p>biogarphy_content</p>
+                <p><?= authGetUser()['biography']; ?></p>
             </div>
 
             <div class="profile-card__additional-data">
-                <p><i class="fa-solid fa-location-pin"></i> location</p>
-                <p><i class="fa-solid fa-cake-candles"></i> birthday</p>
-                <p><i class="fa-solid fa-calendar-days"></i> creation_date</p>
+                <p><i class="fa-solid fa-location-pin"></i> <?= authGetUser()['location']; ?></p>
+                <p><i class="fa-solid fa-cake-candles"></i> Fecha de nacimiento: <?= $birthdate->format('d') . ' de ' ?><?= translateMonth($birthdate->format('F')) . ' de ' . $birthdate->format('Y') ?></p>
+                <p><i class="fa-solid fa-calendar-days"></i> Se unió en <?= translateMonth($creation_date->format('F')) . ' de ' . $birthdate->format('Y') ?></p>
             </div>
         </div>
     </div>
 </section>
-
 
 <section>
     <div class="card content-card">
@@ -86,7 +90,6 @@
     </div>
 </section>
 
-
 <section>
     <div class="card content-card">
         <div class="content-card__content">
@@ -114,7 +117,7 @@
                 <p class="content-card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magnam vel delectus quo labore, qui commodi consequuntur similique hic iure, quas id, quisquam inventore! Saepe commodi quaerat aut praesentium laudantium!</p>
 
                 <div class="content-card__post-photo">
-                    <img src="http://localhost/www/aboutdotme/img/cookie-clicker.jpg" alt="post_photo">
+                    <img src="http://192.168.0.144/www/aboutdotme/img/cookie-clicker.jpg" alt="post_photo">
                 </div>
             </div>
             <div class="content-card__content__actions">
@@ -159,7 +162,7 @@
                 <p class="content-card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magnam vel delectus quo labore, qui commodi consequuntur similique hic iure, quas id, quisquam inventore! Saepe commodi quaerat aut praesentium laudantium!</p>
 
                 <div class="content-card__post-photo">
-                    <img src="http://localhost/www/aboutdotme/img/bobs-burgers.jpeg" alt="post_photo">
+                    <img src="http://192.168.0.144/www/aboutdotme/img/bobs-burgers.jpeg" alt="post_photo">
                 </div>
             </div>
             <div class="content-card__content__actions">
@@ -204,7 +207,7 @@
                 <p class="content-card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magnam vel delectus quo labore, qui commodi consequuntur similique hic iure, quas id, quisquam inventore! Saepe commodi quaerat aut praesentium laudantium!</p>
 
                 <div class="content-card__post-photo">
-                    <img src="http://localhost/www/aboutdotme/img/bajar-es-lo-peor.jpg" alt="post_photo">
+                    <img src="http://192.168.0.144/www/aboutdotme/img/bajar-es-lo-peor.jpg" alt="post_photo">
                 </div>
             </div>
             <div class="content-card__content__actions">

@@ -46,11 +46,36 @@
   color: var(--gray-900-solid);
 }
 
+/* SECTIONS */
+
+.centered-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--spacing-64);
+  text-align: center;
+}
+
+.centered-section h2 {
+  margin-top: var(--spacing-16);
+}
+
+.centered-section p {
+  margin-top: var(--spacing-12);
+}
+
+/* ALERTS */
+
+.alert {
+}
+
 /* NAVBAR */
 
 .navbar {
   position: fixed;
   height: 100vh;
+  min-width: 85px;
   background-color: var(--gray-040-solid);
   padding: var(--spacing-32) var(--spacing-8);
 
@@ -95,6 +120,25 @@
 .navbar__profile-picture img {
   width: 100%;
   border-radius: 50%;
+}
+
+.navbar__unauthorized {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.navbar__button {
+  font-weight: 800;
+}
+
+.navbar__button--login {
+  margin-bottom: var(--spacing-12);
+  background-color: var(--black) !important;
+  color: var(--white);
+}
+
+.navbar__button--sign-up {
 }
 
 /* MAIN */
@@ -215,6 +259,7 @@ section {
 
 .profile-card__additional-data {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .profile-card__additional-data i,
@@ -597,4 +642,53 @@ input[type="file"] {
   margin-left: auto;
   background-color: black;
   color: white;
+}
+
+/* STATUS MESSAGE */
+
+.status-message {
+  position: absolute;
+  bottom: 0;
+  right: var(--spacing-16);
+  font-size: var(--spacing-12);
+}
+
+/* LOGIN */
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__title {
+  margin-bottom: var(--spacing-16);
+}
+
+.login__button {
+  margin: var(--spacing-16) 0;
+  width: 100%;
+}
+
+.login__form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.login__input {
+  background-color: var(--gray-040-solid);
+  border-radius: var(--border-radius-6);
+  padding: var(--spacing-4);
+  border: 1px solid var(--gray-250-solid);
+}
+
+.login__form-group:first-of-type {
+  margin-bottom: var(--spacing-12);
+}
+
+.login__email-error {
+  font-size: var(--spacing-12);
+  color: #dc3545;
+  margin-top: var(--spacing-8);
 }
