@@ -7,10 +7,6 @@ $id_user            = trim($_POST['id_user']);
 $id_post            = trim($_POST['id_post']);
 $comment_content    = trim($_POST['comment_content']);
 
-print_r($id_user);
-print_r($id_post);
-print_r($comment_content);
-
 $errors = [];
 
 if (empty($comment_content)) {

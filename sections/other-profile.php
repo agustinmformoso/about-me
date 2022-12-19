@@ -32,14 +32,19 @@ $creation_date = new DateTime(userSearchById($db, $id_user)['creation_date']);
                 </div>
 
                 <div class="profile-card__stats__container">
-                    <div class="profile-card__stats__stat">
-                        <span><?= $followers ?></span>
-                        <a href="index.php?s=followers-list">Followers</a>
-                    </div>
-                    <div class="profile-card__stats__stat">
-                        <span><?= $followings ?></span>
-                        <a href="index.php?s=following-list">Following</a>
-                    </div>
+                    <a href="index.php?s=followers-list">
+                        <div class="profile-card__stats__stat">
+                            <span><?= $followers ?></span>
+                            <p>Followers</p>
+                        </div>
+                    </a>
+
+                    <a href="index.php?s=following-list">
+                        <div class="profile-card__stats__stat">
+                            <span><?= $followings ?></span>
+                            <p>Following</p>
+                        </div>
+                    </a>
                 </div>
 
             </div>

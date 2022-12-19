@@ -65,3 +65,33 @@ function postDelete($db, $id)
 
     return $success;
 }
+
+
+/**
+ * Creates a posts.
+ *
+ * @param mysqli $db
+ * @param mixed $id
+ * @return array
+ */
+function createPost($db, $data)
+{
+    $id_user = mysqli_real_escape_string($db, $data['id_user'] ?? '');
+    $type = mysqli_real_escape_string($db, $data['type'] ?? '');
+    $title = mysqli_real_escape_string($db, $data['title'] ?? '');
+    $content = mysqli_real_escape_string($db, $data['content'] ?? '');
+    $rating = mysqli_real_escape_string($db, $data['rating'] ?? '');
+
+    $image = 'bobs-burgers.jpeg';
+    $alt_image = 'bobs-burgers';
+
+    $query = "INSERT INTO posts (title, content, rating, type, image, alt_image, id_user)
+              VALUES ('" . $title . "', '" . $content . "', '" . $rating . "', '" . $type . "', '" . $image . "', '" . $alt_image . "', '" . $id_user . "')";
+    $success = mysqli_query($db, $query);
+
+    if ($success) {
+        mysqli_insert_id($db);
+    }
+
+    return false;
+}

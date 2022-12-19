@@ -67,7 +67,9 @@ $creation_date = new DateTime(authGetUser()['creation_date']);
 
 <section>
     <div class="card content-card">
-        <form action="" class="new-post">
+        <form action="actions/post-create.php" method="post" class="new-post">
+            <input type="hidden" name="id_user" value="<?= authGetUser()['id_user']; ?>">
+
             <div class="new-post__row">
                 <select name="" id="" class="new-post__select">
                     <option value="">film</option>
