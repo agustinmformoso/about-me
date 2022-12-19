@@ -71,11 +71,11 @@ $creation_date = new DateTime(authGetUser()['creation_date']);
             <input type="hidden" name="id_user" value="<?= authGetUser()['id_user']; ?>">
 
             <div class="new-post__row">
-                <select name="" id="" class="new-post__select">
-                    <option value="">film</option>
-                    <option value="">serie</option>
-                    <option value="">book</option>
-                    <option value="">game</option>
+                <select name="type" id="" class="new-post__select">
+                    <option value="Film">film</option>
+                    <option value="Serie">serie</option>
+                    <option value="Book">book</option>
+                    <option value="Game">game</option>
                 </select>
 
                 <fieldset class="new-post__star-rating">
@@ -92,9 +92,9 @@ $creation_date = new DateTime(authGetUser()['creation_date']);
                 </fieldset>
             </div>
 
-            <input class="new-post__title" type="text" placeholder="title" />
+            <input class="new-post__title" type="text" name="title" placeholder="title" />
 
-            <textarea class="new-post__post-box" rows="4" placeholder="Post something..."></textarea>
+            <textarea name="content" class="new-post__post-box" rows="4" placeholder="Post something..."></textarea>
 
             <div class="new-post__actions">
                 <label class="new-post__file">
