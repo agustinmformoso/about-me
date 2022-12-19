@@ -739,6 +739,11 @@ input[type="file"] {
   cursor: pointer;
 }
 
+.content-card__footer__form {
+  width: 100%;
+  display: flex;
+}
+
 /* SIGN UP */
 
 .login__input--password {

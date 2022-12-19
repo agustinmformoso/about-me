@@ -22,3 +22,25 @@ function commentsGetById($db, $id)
 
     return $output;
 }
+
+/**
+ * Posts a comment.
+ *
+ * @param mysqli $db
+ * @param mixed $id
+ * @return array
+ */
+function postComment($db, $data)
+{
+    print_r($data);
+
+    $comment_content = mysqli_real_escape_string($db, $data['comment_content'] ?? '');
+    $id_user = mysqli_real_escape_string($db, $data['id_user'] ?? '');
+    $id_post = mysqli_real_escape_string($db, $data['id_post'] ?? '');
+
+    $query = "INSERT INTO comments (comment_content, id_user, id_post)
+              VALUES ('" . $comment_content . "', '" . $id_user . "', '" . $id_post . "')";
+    $success = mysqli_query($db, $query);
+
+    return false;
+}

@@ -205,8 +205,13 @@ $creation_date = new DateTime(authGetUser()['creation_date']);
             </div>
 
             <div class="content-card__footer">
-                <textarea rows="1" placeholder="Comment something..." class="content-card__footer__comment-box"></textarea>
-                <button class="button content-card__comment">Comment</button>
+                <form class="content-card__footer__form" action="actions/post-comment.php" method="post">
+                    <input type="hidden" name="id_user" value="<?= authGetUser()['id_user']; ?>">
+                    <input type="hidden" name="id_post" value="<?= $post['id_post']; ?>">
+
+                    <textarea rows="1" name="comment_content" placeholder="Comment something..." class="content-card__footer__comment-box"></textarea>
+                    <button class="button content-card__comment">Comment</button>
+                </form>
             </div>
         </div>
     <?php
