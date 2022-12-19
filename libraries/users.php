@@ -26,6 +26,29 @@ function userSearchByEmail($db, $email)
 }
 
 /**
+ * Searches for a user by email in the database.
+ * If found it, it returns an array with the registry data.
+ * Otherwise it returns null.
+ *
+ * @param mysqli $db
+ * @param string $email
+ * @return array|null
+ */
+function userSearchById($db, $id)
+{
+    $query = "SELECT * FROM users
+              WHERE id_user = '" . $id . "'";
+    $res = mysqli_query($db, $query);
+
+    if ($row = mysqli_fetch_assoc($res)) {
+        return $row;
+    } else {
+        return null;
+    }
+}
+
+
+/**
  * Creates a new user in the database with the $data provided.
  * If sucessful, it returns the id of the created user.
  * If not, it returns false.

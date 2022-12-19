@@ -371,6 +371,28 @@ section {
   max-height: 280px;
 }
 
+.content-card__content__main {
+  width: 100%;
+}
+
+/* COMMENTS */
+
+.content-card__comments {
+  font-size: 14px;
+  margin-bottom: var(--spacing-12);
+  padding: 0 var(--spacing-32);
+}
+
+.content-card__comment-row {
+  display: flex;
+  margin-bottom: var(--spacing-4);
+}
+
+.content-card__comment-row__user {
+  font-weight: 600;
+  margin-right: var(--spacing-8);
+}
+
 /* DROPDOWN */
 
 .content-card__dropdown {
@@ -647,7 +669,7 @@ input[type="file"] {
 /* STATUS MESSAGE */
 
 .status-message {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: var(--spacing-16);
   font-size: var(--spacing-12);

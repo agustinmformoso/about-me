@@ -1,4 +1,13 @@
 <?php
+require './libraries/posts.php';
+require './libraries/followers.php';
+require './libraries/comments.php';
+
+$id_user = authGetUser()['id_user'];
+$posts = postGetById($db, $id_user);
+$followers = count(followersGetById($db, $id_user));
+$followings = count(followingsGetById($db, $id_user));
+
 $birthdate = new DateTime(authGetUser()['birthdate']);
 $creation_date = new DateTime(authGetUser()['creation_date']);
 ?>
@@ -21,11 +30,11 @@ $creation_date = new DateTime(authGetUser()['creation_date']);
 
                 <div class="profile-card__stats__container">
                     <div class="profile-card__stats__stat">
-                        <span>0</span>
+                        <span><?= $followers ?></span>
                         <p>Followers</p>
                     </div>
                     <div class="profile-card__stats__stat">
-                        <span>0</span>
+                        <span><?= $followings ?></span>
                         <p>Following</p>
                     </div>
 
@@ -91,138 +100,101 @@ $creation_date = new DateTime(authGetUser()['creation_date']);
 </section>
 
 <section>
-    <div class="card content-card">
-        <div class="content-card__content">
-            <div class="content-card__content__likes">
-                <span>0</span>
-                <i class="fa-regular fa-heart"></i>
-            </div>
-            <div class="content-card__content__main">
-                <div class="content-card__heading">
-                    <div class="content-card__heading__tag">
-                        <i class="fa-solid fa-gamepad"></i>
+    <?php
+    foreach ($posts as $post) :
+    ?>
+        <div class="card content-card">
+            <div class="content-card__content">
+                <div class="content-card__content__likes">
+                    <span>0</span>
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+                <div class="content-card__content__main">
+                    <div class="content-card__heading">
+                        <div class="content-card__heading__tag">
+                            <?php
+                            switch ($post['type']) {
+                                case 'Serie':
+                            ?>
+                                    <i class="fa-solid fa-film"></i>
+                                <?php
+                                    break;
+                                case 'Film':
+                                ?>
+                                    <i class="fa-solid fa-film"></i>
+                                <?php
+                                    break;
+                                case 'Game':
+                                ?>
+                                    <i class="fa-solid fa-gamepad"></i>
+                                <?php
+                                    break;
+                                case 'Book':
+                                ?>
+                                    <i class="fa-solid fa-book"></i>
+                            <?php
+                                    break;
+                            }
+                            ?>
+                        </div>
+
+                        <h3><?= htmlspecialchars($post['title']); ?></h3>
+
+                        <div>
+                            <?php
+                            for ($x = 1; $x <= $post['rating']; $x++) {
+                            ?>
+                                <i class="fa-solid fa-star"></i>
+                            <?php
+                            }
+                            ?>
+
+                            <?php
+                            for ($x = 1; $x <= 5 - $post['rating']; $x++) {
+                            ?>
+                                <i class="fa-regular fa-star"></i>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
 
-                    <h3>Cookie Clicker</h3>
+                    <p class="content-card__text"><?= htmlspecialchars($post['content']); ?></p>
 
-                    <div>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
+                    <div class="content-card__post-photo">
+                        <img src="img/<?= $post['image']; ?>" alt="<?= htmlspecialchars($post['alt_image']); ?>">
                     </div>
                 </div>
-
-                <p class="content-card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magnam vel delectus quo labore, qui commodi consequuntur similique hic iure, quas id, quisquam inventore! Saepe commodi quaerat aut praesentium laudantium!</p>
-
-                <div class="content-card__post-photo">
-                    <img src="http://192.168.0.144/www/aboutdotme/img/cookie-clicker.jpg" alt="post_photo">
-                </div>
-            </div>
-            <div class="content-card__content__actions">
-                <div class="content-card__dropdown">
-                    <button onclick="displayDropdown('1')" class="content-card__dropdown-button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                    <div id="dropdown-1" class="content-card__dropdown-content">
-                        <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="#"><i class="fa-solid fa-trash"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="content-card__footer">
-            <textarea rows="1" placeholder="Comment something..." class="content-card__footer__comment-box"></textarea>
-            <button class="button content-card__comment">Comment</button>
-        </div>
-    </div>
-
-    <div class="card content-card">
-        <div class="content-card__content">
-            <div class="content-card__content__likes">
-                <span>0</span>
-                <i class="fa-regular fa-heart"></i>
-            </div>
-            <div class="content-card__content__main">
-                <div class="content-card__heading">
-                    <div class="content-card__heading__tag">
-                        <i class="fa-solid fa-film"></i>
-                    </div>
-
-                    <h3>Bob's Burgers</h3>
-
-                    <div>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                </div>
-
-                <p class="content-card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magnam vel delectus quo labore, qui commodi consequuntur similique hic iure, quas id, quisquam inventore! Saepe commodi quaerat aut praesentium laudantium!</p>
-
-                <div class="content-card__post-photo">
-                    <img src="http://192.168.0.144/www/aboutdotme/img/bobs-burgers.jpeg" alt="post_photo">
-                </div>
-            </div>
-            <div class="content-card__content__actions">
-                <div class="content-card__dropdown">
-                    <button onclick="displayDropdown('2')" class="content-card__dropdown-button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                    <div id="dropdown-2" class="content-card__dropdown-content">
-                        <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="#"><i class="fa-solid fa-trash"></i></a>
+                <div class="content-card__content__actions">
+                    <div class="content-card__dropdown">
+                        <button onclick="displayDropdown(<?= $post['id_post']; ?>)" class="content-card__dropdown-button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        <div id="dropdown-<?= $post['id_post']; ?>" class="content-card__dropdown-content">
+                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="actions/post-delete.php?id=<?= $post['id_post']; ?>"><i class="fa-solid fa-trash"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="content-card__footer">
-            <textarea rows="1" placeholder="Comment something..." class="content-card__footer__comment-box"></textarea>
-            <button class="button content-card__comment">Comment</button>
-        </div>
-    </div>
 
-    <div class="card content-card">
-        <div class="content-card__content">
-            <div class="content-card__content__likes">
-                <span>0</span>
-                <i class="fa-regular fa-heart"></i>
+            <div class="content-card__comments">
+                <?php
+                foreach (commentsGetById($db, $post['id_post']) as $comment) :
+                ?>
+                    <div class="content-card__comment-row">
+                        <p class="content-card__comment-row__user"><?= htmlspecialchars(userSearchById($db, $comment['id_user'])['username']); ?></p>
+                        <p class="content-card__comment-row__text"><?= htmlspecialchars($comment['comment_content']); ?></p>
+                    </div>
+                <?php
+                endforeach;
+                ?>
             </div>
-            <div class="content-card__content__main">
-                <div class="content-card__heading">
-                    <div class="content-card__heading__tag">
-                        <i class="fa-solid fa-book"></i>
-                    </div>
 
-                    <h3>Bajar es lo peor</h3>
-
-                    <div>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                </div>
-
-                <p class="content-card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magnam vel delectus quo labore, qui commodi consequuntur similique hic iure, quas id, quisquam inventore! Saepe commodi quaerat aut praesentium laudantium!</p>
-
-                <div class="content-card__post-photo">
-                    <img src="http://192.168.0.144/www/aboutdotme/img/bajar-es-lo-peor.jpg" alt="post_photo">
-                </div>
-            </div>
-            <div class="content-card__content__actions">
-                <div class="content-card__dropdown">
-                    <button onclick="displayDropdown('3')" class="content-card__dropdown-button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                    <div id="dropdown-3" class="content-card__dropdown-content">
-                        <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="#"><i class="fa-solid fa-trash"></i></a>
-                    </div>
-                </div>
+            <div class="content-card__footer">
+                <textarea rows="1" placeholder="Comment something..." class="content-card__footer__comment-box"></textarea>
+                <button class="button content-card__comment">Comment</button>
             </div>
         </div>
-        <div class="content-card__footer">
-            <textarea rows="1" placeholder="Comment something..." class="content-card__footer__comment-box"></textarea>
-            <button class="button content-card__comment">Comment</button>
-        </div>
-    </div>
+    <?php
+    endforeach;
+    ?>
 </section>
