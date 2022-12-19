@@ -2,6 +2,8 @@
 require './libraries/posts.php';
 require './libraries/followers.php';
 require './libraries/comments.php';
+require './libraries/likes.php';
+require './utils/index.php';
 
 $id_user = authGetUser()['id_user'];
 $posts = postGetById($db, $id_user);
@@ -106,8 +108,16 @@ $creation_date = new DateTime(authGetUser()['creation_date']);
         <div class="card content-card">
             <div class="content-card__content">
                 <div class="content-card__content__likes">
-                    <span>0</span>
-                    <i class="fa-regular fa-heart"></i>
+                    <span><?= count(likesGetById($db, $post['id_post'])); ?></span>
+
+                    <?php
+                    if (isLiked(likesGetById($db, $post['id_post']), authGetUser()['id_user'])) : ?>
+                        <i class="fa-solid fa-heart"></i>
+                    <?php
+                    else : ?>
+                        <i class="fa-regular fa-heart"></i>
+                    <?php
+                    endif; ?>
                 </div>
                 <div class="content-card__content__main">
                     <div class="content-card__heading">

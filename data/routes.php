@@ -16,6 +16,12 @@ $sections = [
             'js/password.js'
         ],
     ],
+    'forgot-password' => [
+        'title' => 'About Me | Forgot password',
+    ],
+    'reset-password' => [
+        'title' => 'About Me | Create new password',
+    ],
     'profile' => [
         'title' => 'About Me | My profile',
     ],

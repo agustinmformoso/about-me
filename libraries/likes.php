@@ -10,7 +10,7 @@
 function likesGetById($db, $id)
 {
     $id = mysqli_real_escape_string($db, $id);
-    $query = "SELECT f.* FROM followers f WHERE f.id_user = '" . $id . "'";
+    $query = "SELECT l.* FROM likes l WHERE l.id_post = '" . $id . "'";
 
     $res = mysqli_query($db, $query);
 
