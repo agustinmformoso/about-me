@@ -25,6 +25,28 @@ function postGetById($db, $id)
 }
 
 /**
+ * Returns all posts.
+ *
+ * @param mysqli $db
+ * @param mixed $id
+ * @return array
+ */
+function postsGetAll($db)
+{
+    $query = "SELECT p.* FROM posts p";
+
+    $res = mysqli_query($db, $query);
+
+    $output = [];
+
+    while ($row = mysqli_fetch_assoc($res)) {
+        $output[] = $row;
+    }
+
+    return $output;
+}
+
+/**
  * Deletes a post item from the database with the provided $id.
  * Returns true if successful, false otherwise
  *

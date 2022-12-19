@@ -26,7 +26,7 @@ $oldData = sessionGetFlashValue('old_data', []);
             <button class="button login__button">Login</button>
         </form>
 
-        <p>¿Olvidaste tu contraseña? <a href="index.php?s=forgot-password">Recuperá tu contraseña</a>.</p>
-        <p>¿Todavía no tenés cuenta? <a href="index.php?s=sign-up">¡Registrate ahora!</a></p>
+        <p>Did you forget your password? <a href="index.php?s=forgot-password">Recover your password</a>.</p>
+        <p>Still don't have an account? <a href="index.php?s=sign-up">Register now!</a></p>
     </div>
 </section>

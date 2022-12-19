@@ -16,6 +16,15 @@ $sections = [
             'js/password.js'
         ],
     ],
+    'followers-list' => [
+        'title' => 'About Me | Followers',
+    ],
+    'following-list' => [
+        'title' => 'About Me | Following',
+    ],
+    'other-profile' => [
+        'title' => 'About Me | Profile',
+    ],
     'forgot-password' => [
         'title' => 'About Me | Forgot password',
     ],

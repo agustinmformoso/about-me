@@ -5,104 +5,55 @@ require './libraries/comments.php';
 require './libraries/likes.php';
 require './utils/index.php';
 
-$id_user = authGetUser()['id_user'];
+$id_user = $_GET['id'];
 $posts = postGetById($db, $id_user);
 $followers = count(followersGetById($db, $id_user));
 $followings = count(followingsGetById($db, $id_user));
 
-$birthdate = new DateTime(authGetUser()['birthdate']);
-$creation_date = new DateTime(authGetUser()['creation_date']);
+
+$birthdate = new DateTime(userSearchById($db, $id_user)['birthdate']);
+$creation_date = new DateTime(userSearchById($db, $id_user)['creation_date']);
 ?>
 
 <section class="profile">
     <div class="profile-card">
         <div class="profile-card__header">
-            <img src="img/<?= authGetUser()['banner_picture']; ?>" alt="<?= authGetUser()['banner_picture_alt']; ?>">
+            <img src="img/<?= userSearchById($db, $id_user)['banner_picture']; ?>" alt="<?= userSearchById($db, $id_user)['banner_picture_alt']; ?>">
         </div>
         <div class="profile-card__body">
             <div class="profile-card__stats">
                 <div class="profile-card__profile-picture">
-                    <img src="img/<?= authGetUser()['profile_picture']; ?>" alt="<?= authGetUser()['profile_picture_alt']; ?>">
+                    <img src="img/<?= userSearchById($db, $id_user)['profile_picture']; ?>" alt="<?= userSearchById($db, $id_user)['profile_picture_alt']; ?>">
                 </div>
 
                 <div class="profile-card__account">
-                    <p><?= authGetUser()['name']; ?></p>
-                    <span>@<?= authGetUser()['username']; ?></span>
+                    <p><?= userSearchById($db, $id_user)['name']; ?></p>
+                    <span>@<?= userSearchById($db, $id_user)['username']; ?></span>
                 </div>
 
                 <div class="profile-card__stats__container">
-                    <a href="index.php?s=followers-list">
-                        <div class="profile-card__stats__stat">
-                            <span><?= $followers ?></span>
-                            <p>Followers</p>
-                        </div>
-                    </a>
-
-                    <a href="index.php?s=following-list">
-                        <div class="profile-card__stats__stat">
-                            <span><?= $followings ?></span>
-                            <p>Following</p>
-                        </div>
-                    </a>
-
-                    <div class="profile-card__stats__actions">
-                        <a href="index.php?s=edit-profile" class="button profile-card__edit-button">Edit profile</a>
+                    <div class="profile-card__stats__stat">
+                        <span><?= $followers ?></span>
+                        <a href="index.php?s=followers-list">Followers</a>
+                    </div>
+                    <div class="profile-card__stats__stat">
+                        <span><?= $followings ?></span>
+                        <a href="index.php?s=following-list">Following</a>
                     </div>
                 </div>
 
             </div>
 
             <div class="profile-card__biography-content">
-                <p><?= authGetUser()['biography']; ?></p>
+                <p><?= userSearchById($db, $id_user)['biography']; ?></p>
             </div>
 
             <div class="profile-card__additional-data">
-                <p><i class="fa-solid fa-location-pin"></i> <?= authGetUser()['location']; ?></p>
+                <p><i class="fa-solid fa-location-pin"></i> <?= userSearchById($db, $id_user)['location']; ?></p>
                 <p><i class="fa-solid fa-cake-candles"></i> Fecha de nacimiento: <?= $birthdate->format('d') . ' de ' ?><?= translateMonth($birthdate->format('F')) . ' de ' . $birthdate->format('Y') ?></p>
                 <p><i class="fa-solid fa-calendar-days"></i> Se unió en <?= translateMonth($creation_date->format('F')) . ' de ' . $birthdate->format('Y') ?></p>
             </div>
         </div>
-    </div>
-</section>
-
-<section>
-    <div class="card content-card">
-        <form action="" class="new-post">
-            <div class="new-post__row">
-                <select name="" id="" class="new-post__select">
-                    <option value="">film</option>
-                    <option value="">serie</option>
-                    <option value="">book</option>
-                    <option value="">game</option>
-                </select>
-
-                <fieldset class="new-post__star-rating">
-                    <input type="radio" value="5" id="stars-star5" name="rating">
-                    <label for="stars-star5" title="5 Stars"></label>
-                    <input type="radio" value="4" id="stars-star4" name="rating">
-                    <label for="stars-star4" title="4 Stars"></label>
-                    <input type="radio" value="3" id="stars-star3" name="rating">
-                    <label for="stars-star3" title="3 Stars"></label>
-                    <input type="radio" value="2" id="stars-star2" name="rating">
-                    <label for="stars-star2" title="2 Stars"></label>
-                    <input type="radio" value="1" id="stars-star1" name="rating">
-                    <label for="stars-star1" title="1 Stars"></label>
-                </fieldset>
-            </div>
-
-            <input class="new-post__title" type="text" placeholder="title" />
-
-            <textarea class="new-post__post-box" rows="4" placeholder="Post something..."></textarea>
-
-            <div class="new-post__actions">
-                <label class="new-post__file">
-                    <input type="file" />
-                    <i class="fa-solid fa-image"></i>
-                </label>
-
-                <button class="button new-post__comment">Post</button>
-            </div>
-        </form>
     </div>
 </section>
 
@@ -116,7 +67,7 @@ $creation_date = new DateTime(authGetUser()['creation_date']);
                     <span><?= count(likesGetById($db, $post['id_post'])); ?></span>
 
                     <?php
-                    if (isLiked(likesGetById($db, $post['id_post']), authGetUser()['id_user'])) : ?>
+                    if (isLiked(likesGetById($db, $post['id_post']), userSearchById($db, $id_user)['id_user'])) : ?>
                         <i class="fa-solid fa-heart"></i>
                     <?php
                     else : ?>

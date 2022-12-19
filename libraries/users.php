@@ -60,24 +60,31 @@ function userSearchById($db, $id)
  *                      password: Required. string.
  *                      name: Required. string.
  *                      lastname: Required. string.
- *                      id_role: Required. int. Default: 2
+ *                      role: Required. int. Default: 2
  * @return bool|int
  */
 function userCreate($db, $data)
 {
-    $id_role = isset($data['id_role'])
-        ? mysqli_real_escape_string($db, $data['id_role'])
-        : 2;
-    $email = mysqli_real_escape_string($db, $data['email']);
+    $role = isset($data['role']) ? mysqli_real_escape_string($db, $data['role']) : 1;
 
+    $email = mysqli_real_escape_string($db, $data['email']);
     $name = mysqli_real_escape_string($db, $data['name'] ?? '');
-    $lastname = mysqli_real_escape_string($db, $data['lastname'] ?? '');
-    $address = mysqli_real_escape_string($db, $data['address'] ?? '');
+    $username = mysqli_real_escape_string($db, $data['username'] ?? '');
+    $location = mysqli_real_escape_string($db, $data['location'] ?? '');
+    $biography = mysqli_real_escape_string($db, $data['biography'] ?? '');
+    $birthdate = mysqli_real_escape_string($db, $data['birthdate'] ?? '');
 
     $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO users (email, password, name, lastname, id_role, address)
-              VALUES ('" . $email . "', '" . $password . "', '" . $name . "', '" . $lastname . "', '" . $id_role . "', '" . $address . "')";
+    $profile_picture = 'profile.jpg';
+    $profile_picture_alt = 'profile picture alt';
+
+    $banner_picture = 'banner.jpeg';
+    $banner_picture_alt = 'banner picture alt';
+
+
+    $query = "INSERT INTO users (username, name, biography, location, birthdate, email, profile_picture, profile_picture_alt, banner_picture, banner_picture_alt, password, role)
+              VALUES ('" . $username . "', '" . $name . "', '" . $biography . "', '" . $location . "', '" . $birthdate . "', '" . $email . "', '" . $profile_picture . "', '" . $profile_picture_alt . "', '" . $banner_picture . "', '" . $banner_picture_alt . "', '" . $password . "', '" . $role . "')";
     $success = mysqli_query($db, $query);
 
     if ($success) {

@@ -229,6 +229,14 @@ section {
   font-weight: bold;
 }
 
+.profile-card__stats__stat a {
+  text-decoration: none;
+}
+
+.profile-card__stats__stat a:hover {
+  text-decoration: underline;
+}
+
 .profile-card__biography-content {
   padding: var(--spacing-8) 0;
 }
@@ -709,6 +717,11 @@ input[type="file"] {
   margin-bottom: var(--spacing-12);
 }
 
+.login__form-group--sign-up {
+  margin-bottom: unset;
+  margin-bottom: var(--spacing-12) !important;
+}
+
 .login__email-error {
   font-size: var(--spacing-12);
   color: #dc3545;
@@ -720,4 +733,55 @@ input[type="file"] {
 .forgot-password-text {
   text-align: center;
   margin-bottom: var(--spacing-24);
+}
+
+.form-password-button i:hover {
+  cursor: pointer;
+}
+
+/* SIGN UP */
+
+.login__input--password {
+  width: 50% !important;
+}
+
+.login__form-group__wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.login__form-group__wrapper div {
+  margin-left: var(--spacing-8);
+}
+
+/* FOLLOWING */
+
+.card-follow {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.card-follow__title {
+  text-align: center;
+}
+
+.card-follow__follow {
+  display: flex;
+  padding: var(--spacing-8) var(--spacing-32);
+}
+
+.card-follow__follow__image {
+  margin-right: var(--spacing-16);
+}
+
+.card-follow__follow__username {
+  font-weight: 600;
+}
+
+.card-follow-link {
+  text-decoration: none;
+}
+
+.card-follow__follow:hover {
+  background-color: var(--gray-040);
 }
